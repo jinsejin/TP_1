@@ -43,4 +43,15 @@ public class Word {
     public void setWord(String word) {
         this.word = word;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder slevel = new StringBuilder();
+        for(int i = 0; i<level; i++){
+            slevel.append("*");
+        }
+        String str = String.format("%-3s", slevel.toString())
+                + String.format("%-15s", word) + " " + meaning;
+        return str;
+    }
 }

@@ -1,12 +1,18 @@
 package org.example;
-
+import java.io.BufferedReader;
+import java.nio.Buffer;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WordCRUD implements ICRUD {
+    //
     ArrayList<Word> list;
     Scanner s;
+    WordCRUD(){
+        // WordCRUd 값이 할당될때 Text에 있는 정보를 List에 담아 정보를 계속 체크해주어야 된다
+
+    }
     WordCRUD(Scanner s){
         list = new ArrayList<>();
         this.s = s;
@@ -24,7 +30,6 @@ public class WordCRUD implements ICRUD {
         Word one = (Word)add();
         list.add(one);
         System.out.println("단어장에 추가 되었습니다.");
-
     }
 
     @Override
@@ -40,5 +45,15 @@ public class WordCRUD implements ICRUD {
     @Override
     public void selectOne(int id) {
 
+    }
+    public void listAll(){
+        System.out.println("----------------------");
+        if(list.isEmpty()){
+            System.out.println("단어장이 텅텅 비어 있습니다.나만의 단어장을 채워주세요");
+        }
+        for(int i = 0; i <list.size(); i++){
+            System.out.print(i+1);
+            System.out.println(list.get(i).toString());
+        }
     }
 }
