@@ -5,7 +5,9 @@ public class Word {
     int level;
     String meaning;
     String word;
-    Word(){}
+    Word(){
+        //파일 입출력하기
+    }
     Word(int id, int level, String meaning, String word){
         this.id = id;
         this.level = level;
