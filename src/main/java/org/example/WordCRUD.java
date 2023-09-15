@@ -7,16 +7,11 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class WordCRUD implements ICRUD {
-    //
-    ArrayList<Word> list;
+
+    ArrayList<Word> list = WordData.list;
     Scanner s;
     final String fname = "Dictionary.txt";
-    WordCRUD(){
-        // WordCRUd 값이 할당될때 Text에 있는 정보를 List에 담아 정보를 계속 체크해주어야 된다
-
-    }
     WordCRUD(Scanner s){
-        list = new ArrayList<>();
         this.s = s;
     }
     @Override
@@ -37,7 +32,6 @@ public class WordCRUD implements ICRUD {
 
     @Override
     public int update(Object obj) {
-        updateItem();
         return 0;
     }
 
@@ -79,7 +73,7 @@ public class WordCRUD implements ICRUD {
         System.out.println("----------------------");
     }
     public void updateItem(){
-        System.out.print("=> 수정할 단어을 적으세요 ");
+        System.out.print("=> 수정할 단어을 적으세요. ");
         String keyword = s.next();
         ArrayList<Integer> idlist = this.listAll(keyword);
         System.out.print("수정할 id 선택하세요! ");
@@ -89,11 +83,10 @@ public class WordCRUD implements ICRUD {
         String meaning = s.nextLine();
         Word word = list.get(idlist.get(id - 1));
         word.setMeaning(meaning);
-        System.out.println("수정이 완료 되었습니당");
+        System.out.println("수정이 완료 되었습니당 ");
     }
 
     public void deleteItem(){
-
         System.out.print("=> 삭제 단어을 적으세요");
         String keyword = s.next();
         ArrayList<Integer> idlist = listAll(keyword);
@@ -112,46 +105,16 @@ public class WordCRUD implements ICRUD {
             System.out.println("삭제가 취소되었습니다.");
         }
     }
-    public void loadfile() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fname));
-            String line;
-            int count = 0;
-            while (true){
-                line = br.readLine();
-                if(line == null) break;
-                String data[] = line.split("\\|");
-                int level = Integer.parseInt(data[0]);
-                String word = data[1];
-                String meaning = data[2];
-                list.add(new Word(0,level,word,meaning));
-                count++;
-            }
-            br.close();
-            System.out.println("==> " + count + "로딩 완료!!! ");
-
-        }catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public void saveFile(){
-        try {
-            PrintWriter pr = new PrintWriter(new FileWriter(fname));
-            for(Word one : list){
-                pr.write(one.toFileString() + "\n");
-            }
-            pr.close();
-            System.out.println("==> 텍스트 파일에 저장완료!!");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     // 단어 서치 기능
     public void searchWord(){
-        System.out.print("=> 검색할 단어 적으세요");
+        System.out.print("=> 검색할 단어 적으세요 ");
         String word = s.next();
         this.listAll(word);
+    }
+    public void setList(ArrayList<Word> list){
+        this.list = list;
+    }
+    public ArrayList<Word> getList(){
+        return this.list;
     }
 }
