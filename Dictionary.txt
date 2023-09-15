@@ -1,0 +1,12 @@
+1|word|단어
+1|apple|사과
+1|kiwi|키위
+3|discrete|이산적인, 분리된
+2|detached|분리된
+2|abstract|추상적인
+2|attractive|매력적인
+1|coffee|커피
+1|friend|친구
+2|friendly|친근한,친숙한
+3|profligacy|방탕
+1| apple|사과

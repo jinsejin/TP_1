@@ -30,6 +30,7 @@ public class WordManager {
                 + "4. 단어 추가 \n"
                 + "5. 단어 수정 \n"
                 + "6. 단어 삭제 \n"
+                + "7. 단어 저장 \n"
                 + "0. 나가기 \n"
                 + "****************** \n"
                 + "=> 원하는 메뉴는? "
@@ -37,12 +38,15 @@ public class WordManager {
         return  s.nextInt();
     }
     public void start(){
+        wordcrud.loadfile();
         while (true) {
             int menuNumver = menu();
             if(menuNumver == 0) break;
             else if(menuNumver == 1) {
                 // read
                 wordcrud.listAll();
+            }else if(menuNumver == 3){
+                wordcrud.searchWord();
             }
             else if(menuNumver == 4) {
                 wordcrud.addword();//add
@@ -55,7 +59,10 @@ public class WordManager {
                 // delete
                 wordcrud.deleteItem();
             }
-         }
+            else if (menuNumver == 7) {
+                wordcrud.saveFile();
+            }
+        }
     }
 
 

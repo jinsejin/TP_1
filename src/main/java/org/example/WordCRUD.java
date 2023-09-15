@@ -1,8 +1,5 @@
 package org.example;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.Buffer;
 import java.sql.Array;
 import java.util.ArrayList;
@@ -13,7 +10,7 @@ public class WordCRUD implements ICRUD {
     //
     ArrayList<Word> list;
     Scanner s;
-    final String fname = "Dictionaly.txt";
+    final String fname = "Dictionary.txt";
     WordCRUD(){
         // WordCRUd 값이 할당될때 Text에 있는 정보를 List에 담아 정보를 계속 체크해주어야 된다
 
@@ -61,7 +58,7 @@ public class WordCRUD implements ICRUD {
         System.out.println("----------------------");
         for(int i = 0; i < list.size(); i++){
             String word = list.get(i).getWord();
-            if(word.contains(keyword)) continue;
+            if(!word.contains(keyword)) continue;
             System.out.print((j + 1) + " ");
             System.out.println(list.get(i).toString());
             idlist.add(i);
@@ -119,13 +116,42 @@ public class WordCRUD implements ICRUD {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fname));
             String line;
-
+            int count = 0;
+            while (true){
+                line = br.readLine();
+                if(line == null) break;
+                String data[] = line.split("\\|");
+                int level = Integer.parseInt(data[0]);
+                String word = data[1];
+                String meaning = data[2];
+                list.add(new Word(0,level,word,meaning));
+                count++;
+            }
             br.close();
+            System.out.println("==> " + count + "로딩 완료!!! ");
+
         }catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+    }
+    public void saveFile(){
+        try {
+            PrintWriter pr = new PrintWriter(new FileWriter(fname));
+            for(Word one : list){
+                pr.write(one.toFileString() + "\n");
+            }
+            pr.close();
+            System.out.println("==> 텍스트 파일에 저장완료!!");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    // 단어 서치 기능
+    public void searchWord(){
+        System.out.print("=> 검색할 단어 적으세요");
+        String word = s.next();
+        this.listAll(word);
     }
 }

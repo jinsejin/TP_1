@@ -52,8 +52,12 @@ public class Word {
         for(int i = 0; i<level; i++){
             slevel.append("*");
         }
-        String str = String.format("%-3s", slevel.toString())
+        String str = String.format("%-3s ", slevel.toString())
                 + String.format("%-15s", word) + " " + meaning;
         return str;
+    }
+
+    public String toFileString(){
+        return this.level + "|" + this.word + "|" + this.meaning;
     }
 }
