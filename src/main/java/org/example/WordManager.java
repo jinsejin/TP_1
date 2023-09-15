@@ -33,7 +33,9 @@ public class WordManager {
             else if(menuNumver == 1) {
                 // read
                 wordcrud.listAll();
-            }else if(menuNumver == 3){
+            } else if (menuNumver == 2) {
+                wordcrud.levelSelect();
+            } else if(menuNumver == 3){
                 wordcrud.searchWord();
             }
             else if(menuNumver == 4) {

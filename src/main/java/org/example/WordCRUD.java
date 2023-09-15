@@ -43,7 +43,23 @@ public class WordCRUD implements ICRUD {
 
     @Override
     public void selectOne(int id) {
-
+        ArrayList<Integer> idlist = new ArrayList<>();
+        int j = 0;
+        System.out.println("----------------------");
+        for(int i = 0; i < list.size(); i++){
+            int level = list.get(i).level;
+            if(!(level == id)) continue;
+            System.out.print((j + 1) + " ");
+            System.out.println(list.get(i).toString());
+            idlist.add(i);
+            j++;
+        }
+        System.out.println("----------------------");
+    }
+    public void levelSelect(){
+        System.out.print("=> 원하는 레벨을 넣으세요 ");
+        int id = s.nextInt();
+        this.selectOne(id);
     }
 
     public ArrayList<Integer> listAll(String keyword){
@@ -111,10 +127,5 @@ public class WordCRUD implements ICRUD {
         String word = s.next();
         this.listAll(word);
     }
-    public void setList(ArrayList<Word> list){
-        this.list = list;
-    }
-    public ArrayList<Word> getList(){
-        return this.list;
-    }
+
 }
