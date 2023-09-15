@@ -39,17 +39,25 @@ public class WordManager {
     public void start(){
         while (true) {
             int menuNumver = menu();
-            System.out.println(menuNumver);
             if(menuNumver == 0) break;
             else if(menuNumver == 1) {
                 // read
                 wordcrud.listAll();
             }
             else if(menuNumver == 4) {
-                wordcrud.addword();
-                //add
+                wordcrud.addword();//add
+            }
+            else if(menuNumver == 5) {
+                // update
+                wordcrud.updateItem();
+            }
+            else if(menuNumver == 6) {
+                // delete
+                wordcrud.deleteItem();
             }
          }
     }
+
+
 
 }
